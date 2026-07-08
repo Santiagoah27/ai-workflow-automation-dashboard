@@ -1,0 +1,20 @@
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# .NET
+backend/**/bin/
+backend/**/obj/
+
+# Local environment
+.env
+.env.local
+frontend/.env*.local
+backend/src/Api/appsettings.Local.json
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

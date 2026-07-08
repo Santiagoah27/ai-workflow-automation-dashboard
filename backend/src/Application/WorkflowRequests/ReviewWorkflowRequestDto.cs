@@ -1,0 +1,3 @@
+namespace AiWorkflowAutomationDashboard.Application.WorkflowRequests;
+
+public sealed record ReviewWorkflowRequestDto(string ReviewedOutput);
