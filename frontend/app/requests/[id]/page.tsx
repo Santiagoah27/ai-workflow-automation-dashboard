@@ -1,4 +1,4 @@
-import { RequestDetailPlaceholder } from "@/features/requests/RequestDetailPlaceholder";
+import { RequestDetail } from "@/features/requests/RequestDetail";
 
 type RequestDetailPageProps = {
   params: Promise<{
@@ -11,5 +11,5 @@ export default async function RequestDetailPage({
 }: RequestDetailPageProps) {
   const { id } = await params;
 
-  return <RequestDetailPlaceholder requestId={id} />;
+  return <RequestDetail requestId={id} />;
 }

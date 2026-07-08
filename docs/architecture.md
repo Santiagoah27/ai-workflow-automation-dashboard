@@ -46,6 +46,7 @@ Frontend responsibilities:
 - Trigger AI generation
 - Allow output review and editing
 - Show loading, empty and error states
+- Call the backend through a typed API service using `NEXT_PUBLIC_API_BASE_URL`
 
 ## Backend Structure
 
@@ -200,6 +201,27 @@ This keeps the first working backend flow easy to run and review while preservin
 ## Swagger
 
 Swagger is enabled in local development so the backend workflow can be tested without frontend integration.
+
+## Frontend And Backend Integration
+
+The frontend calls the backend through `frontend/services/workflowRequestsApi.ts`.
+
+The backend base URL is configured with:
+
+```text
+NEXT_PUBLIC_API_BASE_URL
+```
+
+For local development, the expected value is:
+
+```text
+http://localhost:5080
+```
+
+The backend enables a local development CORS policy for:
+
+- http://localhost:3000
+- http://127.0.0.1:3000
 
 ## Architecture Principles
 

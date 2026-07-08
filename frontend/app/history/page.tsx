@@ -1,5 +1,5 @@
-import { RequestHistoryPlaceholder } from "@/features/history/RequestHistoryPlaceholder";
+import { RequestHistory } from "@/features/history/RequestHistory";
 
 export default function HistoryPage() {
-  return <RequestHistoryPlaceholder />;
+  return <RequestHistory />;
 }

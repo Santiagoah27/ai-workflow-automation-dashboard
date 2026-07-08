@@ -56,4 +56,20 @@ Swagger is enabled for local development.
 
 Reason:
 
-The backend MVP is not integrated with the frontend yet, so Swagger provides a simple way to test the API endpoints and demonstrate the request lifecycle.
+Swagger provides a simple way to test the backend API endpoints directly and verify the request lifecycle independently from the frontend.
+
+## Decision 008: Configure frontend API access through an environment variable
+
+The frontend uses `NEXT_PUBLIC_API_BASE_URL` for the backend API base URL.
+
+Reason:
+
+This keeps API configuration out of UI components, supports local development cleanly and avoids hardcoded backend URLs throughout the frontend.
+
+## Decision 009: Use local-only CORS for frontend development
+
+The backend allows requests from the local Next.js development origins only.
+
+Reason:
+
+The frontend needs to call the backend during local development, but the project should avoid broad CORS settings before deployment requirements are known.

@@ -5,10 +5,21 @@ using AiWorkflowAutomationDashboard.Infrastructure.Persistence;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+const string LocalFrontendCorsPolicy = "LocalFrontend";
 
 builder.Services.AddSingleton<IWorkflowRequestRepository, InMemoryWorkflowRequestRepository>();
 builder.Services.AddScoped<IWorkflowRequestService, WorkflowRequestService>();
 builder.Services.AddScoped<IAiWorkflowProcessor, MockAiWorkflowProcessor>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(LocalFrontendCorsPolicy, policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:3000", "http://127.0.0.1:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 builder.Services
     .AddControllers()
     .AddJsonOptions(options =>
@@ -22,6 +33,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    app.UseCors(LocalFrontendCorsPolicy);
     app.UseSwagger();
     app.UseSwaggerUI();
 }

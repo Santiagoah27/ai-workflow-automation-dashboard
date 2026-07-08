@@ -136,6 +136,18 @@ The frontend runs on the default Next.js development URL:
 http://localhost:3000
 ```
 
+Create a local environment file from the example and point it at the backend:
+
+```bash
+cp .env.example .env.local
+```
+
+Required frontend environment variable:
+
+```text
+NEXT_PUBLIC_API_BASE_URL=http://localhost:5080
+```
+
 ### Backend
 
 ```bash
@@ -166,6 +178,41 @@ Initial backend MVP endpoints:
 - PUT /api/workflow-requests/{id}/archive
 
 The current backend uses in-memory persistence for the first working workflow flow. Data is reset when the API process stops.
+
+### Run The Full App Locally
+
+Terminal 1:
+
+```bash
+cd backend
+dotnet run --project src/Api/Api.csproj
+```
+
+Terminal 2:
+
+```bash
+cd frontend
+npm run dev
+```
+
+Then open:
+
+```text
+http://localhost:3000
+```
+
+Manual test flow:
+
+1. Start the backend.
+2. Start the frontend.
+3. Open Dashboard.
+4. Create a new workflow request.
+5. Navigate to the request detail page.
+6. Generate mock AI output.
+7. Review and edit the output.
+8. Save reviewed output.
+9. Archive the request.
+10. Confirm the request appears correctly in History.
 
 ## What This Project Demonstrates
 
