@@ -97,3 +97,11 @@ The dashboard uses simple status summary cards instead of advanced charts or ana
 Reason:
 
 The MVP should demonstrate workflow automation and human review clearly without adding visual or technical complexity that is not required for the current product story.
+
+## Decision 013: Redesign Request Detail around next-best-action workflow
+
+The Request Detail page is organized around a compact header, a lightweight workflow stepper, a next-best-action panel and a two-column workspace separating original input from generated and reviewed outputs.
+
+Reason:
+
+The previous layout was functional but had too much empty space and did not clearly guide the user through the workflow. The redesigned layout makes the business process easier to understand and demonstrate.
