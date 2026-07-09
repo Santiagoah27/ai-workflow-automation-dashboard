@@ -179,6 +179,8 @@ Initial backend MVP endpoints:
 
 The current backend uses in-memory persistence for the first working workflow flow. Data is reset when the API process stops.
 
+In local development, the in-memory backend starts with fake demo workflow requests so the dashboard, history and detail screens are immediately useful for demos.
+
 ### Run The Full App Locally
 
 Terminal 1:
@@ -213,6 +215,30 @@ Manual test flow:
 8. Save reviewed output.
 9. Archive the request.
 10. Confirm the request appears correctly in History.
+
+## Demo Data
+
+The Development environment seeds realistic fake workflow requests into the in-memory repository:
+
+- Client onboarding summary
+- Internal weekly report
+- Professional email response
+- Process improvement action plan
+
+This data is for local demos only and resets when the backend process stops.
+
+## Screenshots
+
+Screenshots should be captured later for GitHub, LinkedIn Featured and portfolio use.
+
+Planned screenshot checklist:
+
+- Dashboard
+- New Request form
+- Request History
+- Request Detail before generation
+- Request Detail after generation
+- Request Detail after review
 
 ## What This Project Demonstrates
 

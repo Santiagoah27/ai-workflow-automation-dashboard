@@ -8,6 +8,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { ErrorMessage } from "@/components/ui/ErrorMessage";
 import { LoadingState } from "@/components/ui/LoadingState";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { PriorityBadge } from "@/components/ui/PriorityBadge";
 import { StatCard } from "@/components/ui/StatCard";
 import { getWorkflowRequests } from "@/services/workflowRequestsApi";
 import type {
@@ -21,6 +22,7 @@ const dashboardStatuses: RequestStatus[] = [
   "Generated",
   "Reviewed",
   "Failed",
+  "Archived",
 ];
 
 export function DashboardOverview() {
@@ -78,7 +80,7 @@ export function DashboardOverview() {
     <div className="content-stack">
       <PageHeader
         title="Dashboard"
-        description="Track workflow volume, request status and the latest AI-assisted outputs at a glance."
+        description="Turn repetitive work into structured requests, AI-assisted drafts and reviewed outputs your team can trace."
       />
 
       {isLoading ? <LoadingState /> : null}
@@ -90,34 +92,62 @@ export function DashboardOverview() {
             <StatCard
               label="Total Requests"
               value={String(requests.length)}
-              note="All tracked workflow requests"
+              note="All workflow requests created in the system."
             />
             <StatCard
               label="Draft"
               value={String(counts.Draft)}
-              note="Created but not generated"
+              note="Requests captured but not generated yet."
+              tone="draft"
             />
             <StatCard
               label="Generated"
               value={String(counts.Generated)}
-              note="Ready for human review"
+              note="AI-assisted output ready for review."
+              tone="generated"
             />
             <StatCard
               label="Reviewed"
               value={String(counts.Reviewed)}
-              note="Approved edited outputs"
+              note="Outputs approved or edited by the user."
+              tone="reviewed"
             />
             <StatCard
               label="Failed"
               value={String(counts.Failed)}
-              note="Needs attention"
+              note="Requests that failed during generation."
+              tone="failed"
             />
+            <StatCard
+              label="Archived"
+              value={String(counts.Archived)}
+              note="Completed requests kept for traceability."
+              tone="archived"
+            />
+          </section>
+
+          <section className="cta-panel">
+            <div>
+              <h2>Standardize the next repetitive request</h2>
+              <p>
+                Capture business context once, generate a consistent draft and keep
+                reviewed output separate from the original input.
+              </p>
+            </div>
+            <Link className="button" href="/requests/new">
+              Create workflow request
+            </Link>
           </section>
 
           {requests.length === 0 ? (
             <EmptyState
               title="No workflow requests yet"
-              description="Create the first request to see operational status and recent activity here."
+              description="Create the first request to see operational status, recent activity and reviewed outputs here."
+              action={
+                <Link className="button" href="/requests/new">
+                  Create first request
+                </Link>
+              }
             />
           ) : (
             <Card>
@@ -134,6 +164,7 @@ export function DashboardOverview() {
                       <th>Title</th>
                       <th>Business</th>
                       <th>Output</th>
+                      <th>Priority</th>
                       <th>Status</th>
                       <th>Updated</th>
                       <th>Action</th>
@@ -145,6 +176,9 @@ export function DashboardOverview() {
                         <td>{request.title}</td>
                         <td>{request.businessName}</td>
                         <td>{formatEnum(request.desiredOutputType)}</td>
+                        <td>
+                          <PriorityBadge priority={request.priority} />
+                        </td>
                         <td>
                           <Badge status={request.status} />
                         </td>

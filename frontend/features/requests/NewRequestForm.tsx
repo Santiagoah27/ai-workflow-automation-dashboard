@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { type FormEvent, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -67,13 +68,20 @@ export function NewRequestForm() {
     <div className="content-stack">
       <PageHeader
         title="New Request"
-        description="Capture structured business context before generating an AI-assisted output for review."
+        description="Turn unstructured business notes into a traceable workflow request with a clear output goal."
       />
 
       {error ? <ErrorMessage message={error} /> : null}
 
       <Card>
         <form className="form-grid" onSubmit={handleSubmit}>
+          <div className="form-section full">
+            <h2>Request basics</h2>
+            <p>
+              Name the business context and give the request a title your team
+              can recognize later in history.
+            </p>
+          </div>
           <div className="field">
             <label htmlFor="businessName">Business name</label>
             <input
@@ -83,10 +91,11 @@ export function NewRequestForm() {
               onChange={(event) =>
                 setForm({ ...form, businessName: event.target.value })
               }
-              placeholder="Example Clinic"
+              placeholder="Northstar Clinic"
               type="text"
               value={form.businessName}
             />
+            <span className="field-hint">Used to frame the generated output.</span>
           </div>
 
           <div className="field">
@@ -98,10 +107,19 @@ export function NewRequestForm() {
               onChange={(event) =>
                 setForm({ ...form, title: event.target.value })
               }
-              placeholder="Prepare client follow-up"
+              placeholder="Prepare client onboarding summary"
               type="text"
               value={form.title}
             />
+            <span className="field-hint">Keep it specific and action-oriented.</span>
+          </div>
+
+          <div className="form-section full">
+            <h2>Workflow settings</h2>
+            <p>
+              Choose the kind of request, expected output and urgency so the
+              generated draft matches the business task.
+            </p>
           </div>
 
           <div className="field">
@@ -125,6 +143,7 @@ export function NewRequestForm() {
                 </option>
               ))}
             </select>
+            <span className="field-hint">What business process is being handled?</span>
           </div>
 
           <div className="field">
@@ -149,6 +168,7 @@ export function NewRequestForm() {
                 </option>
               ))}
             </select>
+            <span className="field-hint">What format should the draft use?</span>
           </div>
 
           <div className="field">
@@ -172,6 +192,15 @@ export function NewRequestForm() {
                 </option>
               ))}
             </select>
+            <span className="field-hint">Helps the team scan urgent work.</span>
+          </div>
+
+          <div className="form-section full">
+            <h2>Source information</h2>
+            <p>
+              Add enough context for a useful first draft. The original input
+              remains separate from generated and reviewed output.
+            </p>
           </div>
 
           <div className="field full">
@@ -183,9 +212,10 @@ export function NewRequestForm() {
               onChange={(event) =>
                 setForm({ ...form, context: event.target.value })
               }
-              placeholder="Describe the situation, audience, constraints and desired business outcome."
+              placeholder="Describe the situation, audience, constraints and desired business outcome. Example: A client needs a concise onboarding summary after an intake call."
               value={form.context}
             />
+            <span className="field-hint">Required. This is the main business context.</span>
           </div>
 
           <div className="field full">
@@ -197,9 +227,10 @@ export function NewRequestForm() {
               onChange={(event) =>
                 setForm({ ...form, notes: event.target.value })
               }
-              placeholder="Paste raw notes, source details or internal context."
+              placeholder="Paste raw notes, source details or internal context. Example: mention missing documents, owner, next step and expected response time."
               value={form.notes}
             />
+            <span className="field-hint">Optional, but helpful for richer generated drafts.</span>
           </div>
 
           <div className="field full">
@@ -218,6 +249,9 @@ export function NewRequestForm() {
               >
                 Clear
               </Button>
+              <Link className="button secondary" href="/history">
+                Cancel
+              </Link>
             </div>
           </div>
         </form>

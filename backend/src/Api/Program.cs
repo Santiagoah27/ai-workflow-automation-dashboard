@@ -7,7 +7,8 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 const string LocalFrontendCorsPolicy = "LocalFrontend";
 
-builder.Services.AddSingleton<IWorkflowRequestRepository, InMemoryWorkflowRequestRepository>();
+builder.Services.AddSingleton<IWorkflowRequestRepository>(
+    _ => new InMemoryWorkflowRequestRepository(builder.Environment.IsDevelopment()));
 builder.Services.AddScoped<IWorkflowRequestService, WorkflowRequestService>();
 builder.Services.AddScoped<IAiWorkflowProcessor, MockAiWorkflowProcessor>();
 builder.Services.AddCors(options =>

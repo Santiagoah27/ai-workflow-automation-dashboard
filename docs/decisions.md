@@ -73,3 +73,27 @@ The backend allows requests from the local Next.js development origins only.
 Reason:
 
 The frontend needs to call the backend during local development, but the project should avoid broad CORS settings before deployment requirements are known.
+
+## Decision 010: Keep the UI business-tool focused
+
+The frontend polish prioritizes clear workflow visibility, professional forms, readable status badges and traceable request detail views.
+
+Reason:
+
+The project is intended to communicate practical freelance value. A restrained internal-tool experience is more useful for this portfolio project than a decorative or marketing-heavy interface.
+
+## Decision 011: Seed fake development data for demos
+
+The in-memory repository seeds realistic fake workflow requests in Development.
+
+Reason:
+
+The dashboard and history screens should be meaningful immediately during demos, while avoiding real business data and keeping persistence simple.
+
+## Decision 012: Avoid advanced analytics in the MVP
+
+The dashboard uses simple status summary cards instead of advanced charts or analytics.
+
+Reason:
+
+The MVP should demonstrate workflow automation and human review clearly without adding visual or technical complexity that is not required for the current product story.

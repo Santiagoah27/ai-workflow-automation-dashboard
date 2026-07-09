@@ -97,6 +97,7 @@ Backend responsibilities:
 
 - AI provider implementations
 - In-memory workflow request repository for the initial backend MVP
+- Development-only fake demo workflow requests for portfolio demos
 - External integrations later
 
 ## AI Layer
@@ -197,6 +198,8 @@ Implemented backend MVP endpoints:
 The initial backend MVP uses an in-memory repository behind `IWorkflowRequestRepository`.
 
 This keeps the first working backend flow easy to run and review while preserving a clean path to replace persistence with EF Core and SQLite later.
+
+In Development, the repository seeds fake workflow requests so the UI can demonstrate dashboard visibility, history and detail review flows immediately.
 
 ## Swagger
 

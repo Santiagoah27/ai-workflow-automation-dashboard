@@ -9,6 +9,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { ErrorMessage } from "@/components/ui/ErrorMessage";
 import { LoadingState } from "@/components/ui/LoadingState";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { PriorityBadge } from "@/components/ui/PriorityBadge";
 import {
   archiveWorkflowRequest,
   generateWorkflowRequest,
@@ -31,12 +32,6 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
   const [activeAction, setActiveAction] = useState<ActionName>(null);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
-
-  async function loadRequest() {
-    const data = await getWorkflowRequestById(requestId);
-    setRequest(data);
-    setReviewedOutput(data.reviewedOutput ?? data.generatedOutput ?? "");
-  }
 
   useEffect(() => {
     let isMounted = true;
@@ -135,11 +130,21 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
     });
   }
 
+  function startReviewFromGeneratedOutput() {
+    if (!request?.generatedOutput) {
+      setError("Generate output before starting review.");
+      return;
+    }
+
+    setReviewedOutput(request.generatedOutput);
+    setNotice("Generated output copied into the review editor.");
+  }
+
   return (
     <div className="content-stack">
       <PageHeader
         title="Request Detail"
-        description="Review original inputs, generated output and the human-approved final version."
+        description="Follow the request from original context to AI-assisted draft, human review and archive status."
       />
 
       {isLoading ? <LoadingState message="Loading request detail..." /> : null}
@@ -161,6 +166,10 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
                 <h2 className="panel-title">{request.title}</h2>
                 <Badge status={request.status} />
               </div>
+              <p className="panel-copy">
+                Keep source information, generated output and reviewed output
+                separated so the final result remains traceable.
+              </p>
               <dl className="meta-list">
                 <div>
                   <dt>Business</dt>
@@ -176,7 +185,9 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
                 </div>
                 <div>
                   <dt>Priority</dt>
-                  <dd>{request.priority}</dd>
+                  <dd>
+                    <PriorityBadge priority={request.priority} />
+                  </dd>
                 </div>
                 <div>
                   <dt>Created</dt>
@@ -198,6 +209,10 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
 
             <Card>
               <h2 className="panel-title">Actions</h2>
+              <p className="panel-copy">
+                Generate a consistent draft, edit it into a reviewed output and
+                archive the request when the work is complete.
+              </p>
               <div className="button-row">
                 <Button
                   disabled={activeAction !== null}
@@ -229,6 +244,31 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
             </Card>
           </section>
 
+          <section className="workflow-steps" aria-label="Workflow progress">
+            <span className="workflow-step active">1. Request captured</span>
+            <span
+              className={`workflow-step ${
+                request.generatedOutput ? "active" : ""
+              }`}
+            >
+              2. Output generated
+            </span>
+            <span
+              className={`workflow-step ${
+                request.reviewedOutput ? "active" : ""
+              }`}
+            >
+              3. Human reviewed
+            </span>
+            <span
+              className={`workflow-step ${
+                request.status === "Archived" ? "active" : ""
+              }`}
+            >
+              4. Archived
+            </span>
+          </section>
+
           <section className="detail-grid">
             <Card>
               <h2 className="panel-title">Original input</h2>
@@ -243,18 +283,33 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
             <Card>
               <div className="panel-heading">
                 <h2 className="panel-title">Generated output</h2>
-                <Button
-                  disabled={activeAction !== null || !request.generatedOutput}
-                  onClick={() => handleCopy(request.generatedOutput)}
-                  type="button"
-                  variant="secondary"
-                >
-                  Copy
-                </Button>
+                <div className="button-row compact-actions">
+                  <Button
+                    disabled={activeAction !== null || !request.generatedOutput}
+                    onClick={startReviewFromGeneratedOutput}
+                    type="button"
+                    variant="secondary"
+                  >
+                    Start review
+                  </Button>
+                  <Button
+                    disabled={activeAction !== null || !request.generatedOutput}
+                    onClick={() => handleCopy(request.generatedOutput)}
+                    type="button"
+                    variant="secondary"
+                  >
+                    Copy
+                  </Button>
+                </div>
               </div>
-              <pre className="output-pre">
-                {request.generatedOutput ?? "Generate AI output to create a draft."}
-              </pre>
+              {request.generatedOutput ? (
+                <pre className="output-pre">{request.generatedOutput}</pre>
+              ) : (
+                <EmptyState
+                  title="No generated output yet"
+                  description="Generate AI output to create a first draft from the original context and notes."
+                />
+              )}
             </Card>
           </section>
 
@@ -273,9 +328,12 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
             <textarea
               className="textarea reviewed-output"
               onChange={(event) => setReviewedOutput(event.target.value)}
-              placeholder="Edit the generated output here before saving the reviewed version."
+              placeholder="Edit the generated output here before saving the reviewed version. This is the user-approved result."
               value={reviewedOutput}
             />
+            <p className="field-hint">
+              Reviewed output is stored separately from the AI-generated draft.
+            </p>
           </Card>
         </>
       ) : null}
