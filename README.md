@@ -1,43 +1,51 @@
 # AI Workflow Automation Dashboard
 
-A full-stack portfolio project that demonstrates how businesses can automate repetitive internal workflows using structured forms, AI-assisted processing, request tracking and editable generated outputs.
+A full-stack portfolio project that demonstrates how repetitive business workflows can be converted into structured, traceable and AI-assisted internal tools.
 
-## Purpose
+This project is designed to show practical full-stack engineering, AI workflow design, clean architecture and product thinking for internal business tools. It is not just a CRUD demo: the core experience follows a business request from structured input, to mock AI-assisted output, to human review, approval and history.
 
-This project shows how practical AI-driven development can be applied to real business workflows such as document generation, internal reports, client responses, process summaries and repetitive administrative tasks.
+## Business Problem
 
-The goal is to demonstrate business value, clean software architecture, full-stack development, AI workflow design and a professional user experience for internal tools.
+Many small businesses and internal teams still manage repetitive workflows through Excel, email, WhatsApp, documents or unstructured notes. This often creates duplicated work, inconsistent outputs, lack of traceability and slower response times.
 
-## Problem
-
-Many small businesses and internal teams still manage repetitive processes through Excel, email, WhatsApp, documents or unstructured notes.
-
-This usually creates:
-
-- Duplicated manual work
-- Inconsistent outputs
-- Lack of traceability
-- Slow response times
-- Hard-to-review information
-- Repetitive administrative effort
+This project demonstrates how those workflows can be structured, processed with AI assistance and reviewed by a human before being finalized.
 
 ## Solution
 
-AI Workflow Automation Dashboard allows users to create structured workflow requests, generate AI-assisted outputs, review and edit the result, track request status and keep a history of processed work.
+AI Workflow Automation Dashboard lets users create structured workflow requests, generate AI-assisted drafts, review and edit the generated result, save a human-reviewed output and keep the full request available in history.
 
-The application follows a human-in-the-loop approach where AI helps generate structured outputs, but the user keeps control by reviewing, editing and approving the final result.
+The application follows a human-in-the-loop approach:
 
-## Core Features
+- AI helps generate a useful first draft.
+- The user remains responsible for review and approval.
+- Original input, generated output and reviewed output stay separated.
+- Request status gives visibility into the business process.
 
-- Dashboard with workflow request summary
-- Create structured business requests
-- Generate AI-assisted outputs
-- Review and edit generated results
-- Track request status
-- View request history
-- Copy generated output
-- Keep original input and reviewed output separated
-- Handle AI generation failures gracefully
+## Core Workflow
+
+1. Create a structured workflow request.
+2. Add business context, notes and desired output type.
+3. Generate a mock AI-assisted output.
+4. Review and edit the generated result.
+5. Save the reviewed output.
+6. Track the request status.
+7. Keep the request available in history.
+
+## Features
+
+- Dashboard summary for workflow visibility
+- New workflow request form
+- Request history
+- Guided request detail workflow
+- Mock AI-assisted output generation
+- Human-reviewed output step
+- Status tracking
+- Priority labels
+- Copy generated or reviewed output
+- Floating toast notifications for action feedback
+- Loading, empty and error states
+- Professional internal-tool UI
+- Development demo data for portfolio walkthroughs
 
 ## Example Use Cases
 
@@ -61,48 +69,70 @@ The application follows a human-in-the-loop approach where AI helps generate str
 
 - .NET 8 Web API
 - C#
-- Entity Framework Core
+- Layered API, Application, Domain and Infrastructure structure
 
 ### Database
 
-- SQLite for local demo
-- PostgreSQL optional later
+- Current MVP: in-memory repository for local demo speed
+- Planned local persistence: SQLite through Entity Framework Core
+- Optional future persistence: PostgreSQL
 
-### AI Layer
+### AI
 
 - AI workflow processor abstraction
-- Mock AI provider for local development
-- Real AI provider integration later through environment variables
-
-### Documentation
-
-- README.md
-- AGENTS.md
-- docs/project-brief.md
-- docs/architecture.md
-- docs/decisions.md
+- Mock AI provider for local demo
+- Future-ready real provider integration through environment variables
+- No hardcoded API keys
 
 ## Architecture Overview
 
-The project will follow a simple full-stack architecture:
+The project uses a simple full-stack architecture that keeps UI, API orchestration, domain concepts, persistence and AI provider implementation separated.
 
-- Frontend app for dashboard, forms, request history and review flow
-- Backend API for workflow request management
-- Application layer for use cases
-- Domain layer for core entities and enums
-- Infrastructure layer for persistence and AI provider implementation
-- AI provider abstraction to support mock and real providers
+```mermaid
+flowchart LR
+    User[Business User] --> Frontend[Next.js Frontend]
+    Frontend --> Api[.NET Web API]
+    Api --> App[Application Services]
+    App --> Domain[Domain Model]
+    App --> Ai[AI Workflow Processor]
+    Ai --> Mock[Mock AI Provider]
+    App --> Repo[Repository Abstraction]
+    Repo --> Memory[(In-Memory Demo Store)]
+    Repo -. planned .-> Db[(SQLite via EF Core)]
+```
 
-## Initial Project Structure
+Frontend responsibilities:
+
+- Render dashboard, request form, history and guided request detail views
+- Call the backend through a typed API service
+- Keep UI states clear: loading, empty, error and action feedback
+- Keep API configuration in environment variables
+
+Backend responsibilities:
+
+- Expose REST API endpoints
+- Manage workflow request lifecycle
+- Keep controllers thin
+- Run business use cases in application services
+- Keep domain entities and enums in the domain layer
+- Isolate AI generation behind an abstraction
+
+## Project Structure
 
 ```text
 frontend/
   app/
   components/
+    layout/
+    ui/
   features/
+    dashboard/
+    history/
+    requests/
   lib/
   services/
   types/
+
 backend/
   src/
     Api/
@@ -110,8 +140,29 @@ backend/
     Domain/
     Infrastructure/
   tests/
+
 docs/
+  architecture.md
+  decisions.md
+  project-brief.md
+  screenshots/
 ```
+
+## Screenshots
+
+Screenshots should be captured for GitHub, LinkedIn Featured and portfolio use after the UI is finalized.
+
+Planned screenshot checklist:
+
+- Dashboard
+- New Request form
+- Request History
+- Request Detail: captured request step
+- Request Detail: AI-generated output step
+- Request Detail: human review step
+- Request Detail: archived confirmation
+
+Screenshot planning notes are available in [docs/screenshots/README.md](docs/screenshots/README.md).
 
 ## Local Setup
 
@@ -126,37 +177,30 @@ docs/
 ```bash
 cd frontend
 npm install
-npm run build
 npm run dev
 ```
 
-The frontend runs on the default Next.js development URL:
+The frontend runs at:
 
 ```text
 http://localhost:3000
 ```
 
-Create a local environment file from the example and point it at the backend:
+Build the frontend:
 
 ```bash
-cp .env.example .env.local
-```
-
-Required frontend environment variable:
-
-```text
-NEXT_PUBLIC_API_BASE_URL=http://localhost:5080
+cd frontend
+npm run build
 ```
 
 ### Backend
 
 ```bash
 cd backend
-dotnet build AiWorkflowAutomationDashboard.slnx
 dotnet run --project src/Api/Api.csproj
 ```
 
-The backend API runs on:
+The backend API runs at:
 
 ```text
 http://localhost:5080
@@ -168,117 +212,105 @@ Swagger is available in local development:
 http://localhost:5080/swagger
 ```
 
-Initial backend MVP endpoints:
-
-- GET /api/workflow-requests
-- GET /api/workflow-requests/{id}
-- POST /api/workflow-requests
-- POST /api/workflow-requests/{id}/generate
-- PUT /api/workflow-requests/{id}/review
-- PUT /api/workflow-requests/{id}/archive
-
-The current backend uses in-memory persistence for the first working workflow flow. Data is reset when the API process stops.
-
-In local development, the in-memory backend starts with fake demo workflow requests so the dashboard, history and detail screens are immediately useful for demos.
-
-### Run The Full App Locally
-
-Terminal 1:
+Build the backend:
 
 ```bash
 cd backend
-dotnet run --project src/Api/Api.csproj
+dotnet build
 ```
 
-Terminal 2:
+## Environment Variables
+
+Create a local frontend environment file from the example:
 
 ```bash
 cd frontend
-npm run dev
+cp .env.example .env.local
 ```
 
-Then open:
+Required frontend variable:
 
 ```text
-http://localhost:3000
+NEXT_PUBLIC_API_BASE_URL=http://localhost:5080
 ```
 
-Manual test flow:
+Do not commit `.env.local` or secrets.
 
-1. Start the backend.
-2. Start the frontend.
-3. Open Dashboard.
-4. Create a new workflow request.
-5. Navigate to the request detail page.
-6. Follow the guided workflow from captured request to AI-generated output.
-7. Start human review and edit the reviewed output.
-8. Save reviewed output.
-9. Continue to archive and archive the request.
-10. Confirm the request appears correctly in History.
+## API Endpoints
+
+Current backend MVP endpoints:
+
+- `GET /api/workflow-requests`
+- `GET /api/workflow-requests/{id}`
+- `POST /api/workflow-requests`
+- `POST /api/workflow-requests/{id}/generate`
+- `PUT /api/workflow-requests/{id}/review`
+- `PUT /api/workflow-requests/{id}/archive`
 
 ## Demo Data
 
-The Development environment seeds realistic fake workflow requests into the in-memory repository:
+In Development, the in-memory backend starts with realistic fake workflow requests so the dashboard, history and detail screens are useful immediately during demos.
+
+Demo examples:
 
 - Client onboarding summary
 - Internal weekly report
 - Professional email response
 - Process improvement action plan
 
-This data is for local demos only and resets when the backend process stops.
+Demo data is fake and resets when the backend process stops.
 
-## Screenshots
+## Manual Demo Flow
 
-Screenshots should be captured later for GitHub, LinkedIn Featured and portfolio use.
-
-Planned screenshot checklist:
-
-- Dashboard
-- New Request form
-- Request History
-- Request Detail before generation
-- Request Detail after generation
-- Request Detail after review
+1. Start the backend.
+2. Start the frontend.
+3. Open Dashboard.
+4. Review the workflow summary cards and recent requests.
+5. Create a new workflow request.
+6. Open the request detail page.
+7. Follow the guided workflow from captured request to AI-generated output.
+8. Start human review and edit the reviewed output.
+9. Save the reviewed output.
+10. Copy the reviewed output.
+11. Continue to archive and archive the request.
+12. Confirm the request appears correctly in History.
 
 ## What This Project Demonstrates
 
-- Full-stack engineering
-- AI-driven workflow automation
-- Business process thinking
-- Clean API design
-- Reusable frontend architecture
-- Human-in-the-loop AI workflows
-- Maintainable backend architecture
-- Portfolio-ready documentation
-- Practical software delivery
+- Full-stack engineering with React, Next.js and .NET
+- Business process automation thinking
+- AI-assisted workflow design
+- Human-in-the-loop review patterns
+- Clean REST API boundaries
+- Typed frontend API integration
+- Layered backend architecture
+- Mock-provider-first AI integration
+- Professional internal-tool UX
+- Loading, empty, error and toast feedback states
+- Portfolio-ready documentation and demo flow
 
-## Initial MVP Scope
-
-The first MVP will include:
-
-- Dashboard page
-- New request page
-- Request history page
-- Request detail page
-- Mock AI generation
-- Editable reviewed output
-- Status tracking
-- Copy output action
-
-The first MVP will not include:
-
-- Authentication
-- Payments
-- Multi-tenancy
-- File upload
-- OCR
-- Advanced analytics
-- Notifications
-- Chatbot
-- Deployment
-- Docker
-- CI/CD
-
-## Status
+## Current Status
 
 In development.
+
+Implemented:
+
+- Frontend pages for dashboard, new request, history and request detail
+- Backend workflow request API
+- Mock AI output generation
+- Guided request detail workflow
+- Human-reviewed output flow
+- Archive flow
+- Floating toast notifications
+- Development demo data
+
+## Future Improvements
+
+These are intentionally outside the current MVP scope:
+
+- Replace in-memory persistence with EF Core and SQLite
+- Add real AI provider integration behind the existing abstraction
+- Add prompt versioning documentation
+- Add automated tests around workflow services and frontend behavior
+- Capture final screenshots for GitHub, LinkedIn and portfolio pages
+- Add deployment documentation when deployment is in scope

@@ -121,3 +121,11 @@ Global action feedback now uses floating toast notifications for copy, generate,
 Reason:
 
 Inline or fixed page-level feedback can be missed when users are focused on another part of the page or scrolled lower in the workflow. Floating toast notifications provide immediate, visible feedback for actions such as copy, save, generate and archive without disrupting the workflow.
+
+## Decision 016: Present the repository as a portfolio case study
+
+The README and supporting docs are structured to explain the business problem, workflow, architecture, demo flow and future improvements for GitHub, LinkedIn Featured and portfolio review.
+
+Reason:
+
+The project is intended to communicate freelance-ready product and engineering judgment. A portfolio case-study structure helps recruiters, clients and technical reviewers understand the business value, technical boundaries and current MVP status quickly.

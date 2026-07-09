@@ -10,8 +10,33 @@ The architecture must remain simple, maintainable and easy to understand for por
 
 - Frontend: Next.js, React and TypeScript
 - Backend: .NET 8 Web API
-- Database: SQLite for local demo
+- Current persistence: in-memory repository for local demo speed
+- Planned database: SQLite through EF Core
 - AI Layer: Mock provider first, real provider later through abstraction
+
+## High-Level Flow
+
+```mermaid
+flowchart LR
+    User[Business User] --> Frontend[Next.js Frontend]
+    Frontend --> Api[.NET Web API]
+    Api --> App[Application Services]
+    App --> Domain[Domain Model]
+    App --> Ai[AI Workflow Processor]
+    Ai --> Mock[Mock AI Provider]
+    App --> Repo[Repository Abstraction]
+    Repo --> Memory[(In-Memory Demo Store)]
+    Repo -. planned .-> Db[(SQLite via EF Core)]
+```
+
+The main workflow is:
+
+1. The user creates a structured request in the frontend.
+2. The frontend sends the request to the backend API.
+3. Application services coordinate request lifecycle changes.
+4. The AI workflow processor creates a mock generated output.
+5. The user reviews and saves a human-approved output.
+6. The request remains available in history with its status and timestamps.
 
 ## Frontend Structure
 
