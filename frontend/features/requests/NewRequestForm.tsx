@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ErrorMessage } from "@/components/ui/ErrorMessage";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { useToast } from "@/components/ui/ToastProvider";
 import { createWorkflowRequest } from "@/services/workflowRequestsApi";
 import {
   outputTypeOptions,
@@ -28,6 +29,7 @@ const initialForm: CreateWorkflowRequestPayload = {
 
 export function NewRequestForm() {
   const router = useRouter();
+  const { showToast } = useToast();
   const [form, setForm] = useState<CreateWorkflowRequestPayload>(initialForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -52,6 +54,7 @@ export function NewRequestForm() {
         notes: form.notes.trim(),
       });
 
+      showToast({ message: "Workflow request created.", type: "success" });
       router.push(`/requests/${created.id}`);
     } catch (currentError) {
       setError(
@@ -59,6 +62,7 @@ export function NewRequestForm() {
           ? currentError.message
           : "Unable to create workflow request.",
       );
+      showToast({ message: "Could not create workflow request.", type: "error" });
     } finally {
       setIsSubmitting(false);
     }

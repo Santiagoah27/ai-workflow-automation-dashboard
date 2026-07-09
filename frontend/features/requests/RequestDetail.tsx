@@ -8,6 +8,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { ErrorMessage } from "@/components/ui/ErrorMessage";
 import { LoadingState } from "@/components/ui/LoadingState";
 import { PriorityBadge } from "@/components/ui/PriorityBadge";
+import { useToast } from "@/components/ui/ToastProvider";
 import {
   archiveWorkflowRequest,
   generateWorkflowRequest,
@@ -36,6 +37,7 @@ const workflowSteps: Array<{
 ];
 
 export function RequestDetail({ requestId }: RequestDetailProps) {
+  const { showToast } = useToast();
   const [request, setRequest] = useState<WorkflowRequestDetail | null>(null);
   const [activeStep, setActiveStep] = useState<WorkflowStep>("captured");
   const [transitionDirection, setTransitionDirection] =
@@ -45,7 +47,6 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [activeAction, setActiveAction] = useState<ActionName>(null);
   const [error, setError] = useState<string | null>(null);
-  const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -88,24 +89,22 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
     setTransitionDirection(getStepIndex(step) >= getStepIndex(activeStep) ? "forward" : "back");
     setActiveStep(step);
     setError(null);
-    setNotice(null);
   }
 
   async function runAction(
     action: Exclude<ActionName, null>,
     task: () => Promise<void>,
+    errorMessage: string,
   ) {
     try {
       setActiveAction(action);
       setError(null);
-      setNotice(null);
       await task();
     } catch (currentError) {
-      setError(
-        currentError instanceof Error
-          ? currentError.message
-          : "The action could not be completed.",
-      );
+      showToast({
+        message: errorMessage,
+        type: "error",
+      });
     } finally {
       setActiveAction(null);
     }
@@ -119,8 +118,8 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
       setIsReviewing(false);
       setTransitionDirection("forward");
       setActiveStep("generated");
-      setNotice("AI-generated draft is ready for review.");
-    });
+      showToast({ message: "AI-generated output created.", type: "success" });
+    }, "Could not generate output.");
   }
 
   function handleStartReview() {
@@ -148,8 +147,8 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
       setReviewedOutput(updated.reviewedOutput ?? "");
       setIsReviewing(false);
       setActiveStep("review");
-      setNotice("Human-reviewed output saved.");
-    });
+      showToast({ message: "Reviewed output saved.", type: "success" });
+    }, "Could not save reviewed output.");
   }
 
   async function handleArchive() {
@@ -158,20 +157,20 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
       setRequest(updated);
       setIsReviewing(false);
       setActiveStep("archive");
-      setNotice("Request archived.");
-    });
+      showToast({ message: "Request archived.", type: "success" });
+    }, "Could not archive request.");
   }
 
   async function handleCopy(value: string | null) {
     if (!value) {
-      setError("There is no output to copy yet.");
+      showToast({ message: "Could not copy to clipboard.", type: "error" });
       return;
     }
 
     await runAction("copy", async () => {
       await navigator.clipboard.writeText(value);
-      setNotice("Output copied.");
-    });
+      showToast({ message: "Copied to clipboard.", type: "success" });
+    }, "Could not copy to clipboard.");
   }
 
   function handleCancelReview() {
@@ -592,7 +591,6 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
     <div className="guided-detail-page">
       {isLoading ? <LoadingState message="Loading request detail..." /> : null}
       {error ? <ErrorMessage message={error} /> : null}
-      {notice ? <section className="success-message">{notice}</section> : null}
 
       {!isLoading && !error && !request ? (
         <EmptyState

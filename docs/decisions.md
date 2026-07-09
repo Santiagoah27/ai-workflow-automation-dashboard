@@ -113,3 +113,11 @@ The Request Detail page now shows one workflow step at a time: captured request,
 Reason:
 
 Showing all workflow sections at once made the interface visually saturated and confusing. A guided step-by-step flow reduces cognitive load, gives the user one clear action at a time and better communicates the human-in-the-loop process.
+
+## Decision 015: Use floating toast notifications for global action feedback
+
+Global action feedback now uses floating toast notifications for copy, generate, review, archive and request creation actions.
+
+Reason:
+
+Inline or fixed page-level feedback can be missed when users are focused on another part of the page or scrolled lower in the workflow. Floating toast notifications provide immediate, visible feedback for actions such as copy, save, generate and archive without disrupting the workflow.
