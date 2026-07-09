@@ -2,13 +2,18 @@ using AiWorkflowAutomationDashboard.Application.Ai;
 using AiWorkflowAutomationDashboard.Application.WorkflowRequests;
 using AiWorkflowAutomationDashboard.Infrastructure.Ai;
 using AiWorkflowAutomationDashboard.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 const string LocalFrontendCorsPolicy = "LocalFrontend";
 
-builder.Services.AddSingleton<IWorkflowRequestRepository>(
-    _ => new InMemoryWorkflowRequestRepository(builder.Environment.IsDevelopment()));
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? "Data Source=workflow-automation.db";
+
+builder.Services.AddDbContext<WorkflowDbContext>(options =>
+    options.UseSqlite(connectionString));
+builder.Services.AddScoped<IWorkflowRequestRepository, EfWorkflowRequestRepository>();
 builder.Services.AddScoped<IWorkflowRequestService, WorkflowRequestService>();
 builder.Services.AddScoped<IAiWorkflowProcessor, MockAiWorkflowProcessor>();
 builder.Services.AddCors(options =>
@@ -40,5 +45,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+
+await WorkflowDatabaseInitializer.InitializeAsync(
+    app.Services,
+    app.Environment.IsDevelopment());
 
 app.Run();

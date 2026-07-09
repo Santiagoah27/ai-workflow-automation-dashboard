@@ -6,6 +6,13 @@ frontend/out/
 # .NET
 backend/**/bin/
 backend/**/obj/
+backend/**/*.db
+backend/**/*.db-shm
+backend/**/*.db-wal
+workflow-automation.db
+*.db
+*.db-shm
+*.db-wal
 
 # Local environment
 .env

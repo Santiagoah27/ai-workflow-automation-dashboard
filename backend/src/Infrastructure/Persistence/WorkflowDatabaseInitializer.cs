@@ -1,90 +1,32 @@
-using AiWorkflowAutomationDashboard.Application.WorkflowRequests;
 using AiWorkflowAutomationDashboard.Domain.Entities;
 using AiWorkflowAutomationDashboard.Domain.Enums;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AiWorkflowAutomationDashboard.Infrastructure.Persistence;
 
-public sealed class InMemoryWorkflowRequestRepository : IWorkflowRequestRepository
+public static class WorkflowDatabaseInitializer
 {
-    private readonly object _syncRoot = new();
-    private readonly Dictionary<Guid, WorkflowRequest> _requests = [];
-
-    public InMemoryWorkflowRequestRepository(bool seedDemoData = false)
-    {
-        if (seedDemoData)
-        {
-            foreach (var request in CreateDemoRequests())
-            {
-                _requests[request.Id] = request;
-            }
-        }
-    }
-
-    public Task<IReadOnlyCollection<WorkflowRequest>> GetListAsync(
+    public static async Task InitializeAsync(
+        IServiceProvider serviceProvider,
+        bool seedDemoData,
         CancellationToken cancellationToken = default)
     {
-        lock (_syncRoot)
-        {
-            return Task.FromResult<IReadOnlyCollection<WorkflowRequest>>(
-                _requests.Values.Select(Clone).ToArray());
-        }
-    }
+        using var scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<WorkflowDbContext>();
 
-    public Task<WorkflowRequest?> GetByIdAsync(
-        Guid id,
-        CancellationToken cancellationToken = default)
-    {
-        lock (_syncRoot)
-        {
-            return Task.FromResult(
-                _requests.TryGetValue(id, out var request) ? Clone(request) : null);
-        }
-    }
+        await dbContext.Database.MigrateAsync(cancellationToken);
 
-    public Task AddAsync(
-        WorkflowRequest request,
-        CancellationToken cancellationToken = default)
-    {
-        lock (_syncRoot)
+        if (!seedDemoData ||
+            await dbContext.WorkflowRequests.AnyAsync(cancellationToken))
         {
-            _requests[request.Id] = Clone(request);
+            return;
         }
 
-        return Task.CompletedTask;
-    }
-
-    public Task UpdateAsync(
-        WorkflowRequest request,
-        CancellationToken cancellationToken = default)
-    {
-        lock (_syncRoot)
-        {
-            _requests[request.Id] = Clone(request);
-        }
-
-        return Task.CompletedTask;
-    }
-
-    private static WorkflowRequest Clone(WorkflowRequest request)
-    {
-        return new WorkflowRequest
-        {
-            Id = request.Id,
-            BusinessName = request.BusinessName,
-            Title = request.Title,
-            RequestType = request.RequestType,
-            Context = request.Context,
-            Notes = request.Notes,
-            DesiredOutputType = request.DesiredOutputType,
-            Priority = request.Priority,
-            Status = request.Status,
-            GeneratedOutput = request.GeneratedOutput,
-            ReviewedOutput = request.ReviewedOutput,
-            CreatedAt = request.CreatedAt,
-            UpdatedAt = request.UpdatedAt,
-            ProcessedAt = request.ProcessedAt,
-            ErrorMessage = request.ErrorMessage
-        };
+        await dbContext.WorkflowRequests.AddRangeAsync(
+            CreateDemoRequests(),
+            cancellationToken);
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 
     private static IReadOnlyCollection<WorkflowRequest> CreateDemoRequests()

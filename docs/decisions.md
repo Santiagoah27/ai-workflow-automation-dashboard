@@ -84,7 +84,7 @@ The project is intended to communicate practical freelance value. A restrained i
 
 ## Decision 011: Seed fake development data for demos
 
-The in-memory repository seeds realistic fake workflow requests in Development.
+The local persistence layer seeds realistic fake workflow requests in Development when the database is empty.
 
 Reason:
 
@@ -129,3 +129,11 @@ The README and supporting docs are structured to explain the business problem, w
 Reason:
 
 The project is intended to communicate freelance-ready product and engineering judgment. A portfolio case-study structure helps recruiters, clients and technical reviewers understand the business value, technical boundaries and current MVP status quickly.
+
+## Decision 017: Replace in-memory persistence with SQLite
+
+Workflow requests are now persisted with Entity Framework Core and SQLite behind the existing repository abstraction.
+
+Reason:
+
+Request history, reviewed output and status tracking are core to the project, so the portfolio-ready version needs real local persistence while remaining easy to run.

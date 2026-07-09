@@ -10,8 +10,7 @@ The architecture must remain simple, maintainable and easy to understand for por
 
 - Frontend: Next.js, React and TypeScript
 - Backend: .NET 8 Web API
-- Current persistence: in-memory repository for local demo speed
-- Planned database: SQLite through EF Core
+- Persistence: SQLite through EF Core
 - AI Layer: Mock provider first, real provider later through abstraction
 
 ## High-Level Flow
@@ -25,8 +24,7 @@ flowchart LR
     App --> Ai[AI Workflow Processor]
     Ai --> Mock[Mock AI Provider]
     App --> Repo[Repository Abstraction]
-    Repo --> Memory[(In-Memory Demo Store)]
-    Repo -. planned .-> Db[(SQLite via EF Core)]
+    Repo --> Db[(SQLite Database)]
 ```
 
 The main workflow is:
@@ -85,6 +83,8 @@ backend/
     Application/
     Domain/
     Infrastructure/
+      Persistence/
+        Migrations/
   tests/
 ```
 
@@ -121,8 +121,8 @@ Backend responsibilities:
 ### Infrastructure
 
 - AI provider implementations
-- In-memory workflow request repository for the initial backend MVP
-- Development-only fake demo workflow requests for portfolio demos
+- EF Core SQLite workflow request repository
+- Development-only fake demo workflow requests for portfolio demos when the database is empty
 - External integrations later
 
 ## AI Layer
@@ -220,11 +220,11 @@ Implemented backend MVP endpoints:
 
 ## Current Persistence
 
-The initial backend MVP uses an in-memory repository behind `IWorkflowRequestRepository`.
+The backend uses SQLite through Entity Framework Core behind `IWorkflowRequestRepository`.
 
-This keeps the first working backend flow easy to run and review while preserving a clean path to replace persistence with EF Core and SQLite later.
+The local database is created automatically when the backend starts. EF Core applies migrations at startup and stores data in `workflow-automation.db`.
 
-In Development, the repository seeds fake workflow requests so the UI can demonstrate dashboard visibility, history and detail review flows immediately.
+In Development, the database seeds fake workflow requests only when it is empty so the UI can demonstrate dashboard visibility, history and detail review flows immediately without overwriting local test data.
 
 ## Swagger
 

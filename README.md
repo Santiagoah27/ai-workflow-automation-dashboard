@@ -73,8 +73,8 @@ The application follows a human-in-the-loop approach:
 
 ### Database
 
-- Current MVP: in-memory repository for local demo speed
-- Planned local persistence: SQLite through Entity Framework Core
+- SQLite for local demo persistence
+- Entity Framework Core migrations
 - Optional future persistence: PostgreSQL
 
 ### AI
@@ -97,8 +97,7 @@ flowchart LR
     App --> Ai[AI Workflow Processor]
     Ai --> Mock[Mock AI Provider]
     App --> Repo[Repository Abstraction]
-    Repo --> Memory[(In-Memory Demo Store)]
-    Repo -. planned .-> Db[(SQLite via EF Core)]
+    Repo --> Db[(SQLite Database)]
 ```
 
 Frontend responsibilities:
@@ -139,6 +138,8 @@ backend/
     Application/
     Domain/
     Infrastructure/
+      Persistence/
+        Migrations/
   tests/
 
 docs/
@@ -219,6 +220,14 @@ cd backend
 dotnet build
 ```
 
+The local SQLite database is created automatically when the backend starts. EF Core applies migrations at startup and stores local data in:
+
+```text
+backend/src/Api/workflow-automation.db
+```
+
+The database file is ignored by Git.
+
 ## Environment Variables
 
 Create a local frontend environment file from the example:
@@ -247,9 +256,9 @@ Current backend MVP endpoints:
 - `PUT /api/workflow-requests/{id}/review`
 - `PUT /api/workflow-requests/{id}/archive`
 
-## Demo Data
+## Local Persistence And Demo Data
 
-In Development, the in-memory backend starts with realistic fake workflow requests so the dashboard, history and detail screens are useful immediately during demos.
+In Development, the SQLite database is seeded with realistic fake workflow requests only when the database is empty. This keeps the dashboard, history and detail screens useful immediately during demos while preserving requests created during local testing.
 
 Demo examples:
 
@@ -258,7 +267,7 @@ Demo examples:
 - Professional email response
 - Process improvement action plan
 
-Demo data is fake and resets when the backend process stops.
+Demo data is fake. Local workflow requests persist across backend restarts until the local SQLite database file is deleted.
 
 ## Manual Demo Flow
 
@@ -298,6 +307,7 @@ Implemented:
 - Frontend pages for dashboard, new request, history and request detail
 - Backend workflow request API
 - Mock AI output generation
+- SQLite persistence with EF Core migrations
 - Guided request detail workflow
 - Human-reviewed output flow
 - Archive flow
@@ -308,7 +318,6 @@ Implemented:
 
 These are intentionally outside the current MVP scope:
 
-- Replace in-memory persistence with EF Core and SQLite
 - Add real AI provider integration behind the existing abstraction
 - Add prompt versioning documentation
 - Add automated tests around workflow services and frontend behavior
