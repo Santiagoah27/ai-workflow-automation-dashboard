@@ -210,10 +210,10 @@ Manual test flow:
 3. Open Dashboard.
 4. Create a new workflow request.
 5. Navigate to the request detail page.
-6. Generate mock AI output.
-7. Review and edit the output.
+6. Follow the guided workflow from captured request to AI-generated output.
+7. Start human review and edit the reviewed output.
 8. Save reviewed output.
-9. Archive the request.
+9. Continue to archive and archive the request.
 10. Confirm the request appears correctly in History.
 
 ## Demo Data

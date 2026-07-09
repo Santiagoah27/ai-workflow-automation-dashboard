@@ -105,3 +105,11 @@ The Request Detail page is organized around a compact header, a lightweight work
 Reason:
 
 The previous layout was functional but had too much empty space and did not clearly guide the user through the workflow. The redesigned layout makes the business process easier to understand and demonstrate.
+
+## Decision 014: Use guided step-by-step workflow on Request Detail
+
+The Request Detail page now shows one workflow step at a time: captured request, AI-generated output, human review and archive.
+
+Reason:
+
+Showing all workflow sections at once made the interface visually saturated and confusing. A guided step-by-step flow reduces cognitive load, gives the user one clear action at a time and better communicates the human-in-the-loop process.
