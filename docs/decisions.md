@@ -153,3 +153,11 @@ The README now references screenshots captured from the running local applicatio
 Reason:
 
 Real screenshots help reviewers understand the product experience quickly without running the app first. Using the actual local UI keeps the portfolio presentation accurate and avoids mockups, invented metrics or claims of production usage.
+
+## Decision 020: Create separate portfolio and communication assets
+
+The project now includes separate documents for the case study, portfolio summary, LinkedIn Featured copy, LinkedIn post, recruiter pitch and client pitch.
+
+Reason:
+
+The project is intended to support professional positioning for job opportunities and freelance work. Separating technical documentation from portfolio, recruiter and client-facing copy keeps the repository clear and makes the communication assets easier to reuse.
