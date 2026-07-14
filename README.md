@@ -4,6 +4,12 @@ A full-stack portfolio project that demonstrates how repetitive business workflo
 
 This project is designed to show practical full-stack engineering, AI workflow design, clean architecture and product thinking for internal business tools. It is not just a CRUD demo: the core experience follows a business request from structured input, to mock AI-assisted output, to human review, approval and history.
 
+## Portfolio Summary
+
+This project demonstrates how repetitive business workflows can be converted into structured internal tools with AI-assisted generation, human review and request traceability.
+
+It was built to showcase full-stack development with Next.js, React, TypeScript and .NET, along with clean API boundaries, layered backend architecture, AI provider abstraction and professional internal-tool UX.
+
 ## Business Problem
 
 Many small businesses and internal teams still manage repetitive workflows through Excel, email, WhatsApp, documents or unstructured notes. This often creates duplicated work, inconsistent outputs, lack of traceability and slower response times.
@@ -30,6 +36,38 @@ The application follows a human-in-the-loop approach:
 5. Save the reviewed output.
 6. Track the request status.
 7. Keep the request available in history.
+
+## Screenshots
+
+These screenshots were captured from the real local development application with fake demo data.
+
+### Dashboard
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+### New Workflow Request
+
+![New Workflow Request](docs/screenshots/new-request.png)
+
+### Request History
+
+![Request History](docs/screenshots/history.png)
+
+### Captured Request
+
+![Captured Request](docs/screenshots/request-detail-captured.png)
+
+### AI-Generated Output
+
+![AI-Generated Output](docs/screenshots/request-detail-generated.png)
+
+### Human Review
+
+![Human Review](docs/screenshots/request-detail-reviewed.png)
+
+### Archived Request
+
+![Archived Request](docs/screenshots/request-detail-archived.png)
 
 ## Features
 
@@ -148,22 +186,6 @@ docs/
   project-brief.md
   screenshots/
 ```
-
-## Screenshots
-
-Screenshots should be captured for GitHub, LinkedIn Featured and portfolio use after the UI is finalized.
-
-Planned screenshot checklist:
-
-- Dashboard
-- New Request form
-- Request History
-- Request Detail: captured request step
-- Request Detail: AI-generated output step
-- Request Detail: human review step
-- Request Detail: archived confirmation
-
-Screenshot planning notes are available in [docs/screenshots/README.md](docs/screenshots/README.md).
 
 ## Local Setup
 
@@ -338,6 +360,7 @@ Implemented:
 - Archive flow
 - Floating toast notifications
 - Development demo data
+- Portfolio screenshots captured from the local app
 
 ## Future Improvements
 
@@ -346,5 +369,4 @@ These are intentionally outside the current MVP scope:
 - Add real AI provider integration behind the existing abstraction
 - Add prompt versioning documentation
 - Add frontend behavior tests when the UI stabilizes further
-- Capture final screenshots for GitHub, LinkedIn and portfolio pages
 - Add deployment documentation when deployment is in scope

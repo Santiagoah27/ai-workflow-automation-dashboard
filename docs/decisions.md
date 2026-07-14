@@ -145,3 +145,11 @@ The backend now includes a small xUnit test project focused on the application s
 Reason:
 
 The workflow lifecycle is the core business behavior of the project. Focused service-level tests protect request creation, mock generation, human review, archiving and not-found behavior without adding heavy test infrastructure or coupling tests to implementation details.
+
+## Decision 019: Use real local screenshots for portfolio presentation
+
+The README now references screenshots captured from the running local application using fake development demo data.
+
+Reason:
+
+Real screenshots help reviewers understand the product experience quickly without running the app first. Using the actual local UI keeps the portfolio presentation accurate and avoids mockups, invented metrics or claims of production usage.

@@ -1,30 +1,24 @@
 # Screenshots
 
-Capture these screenshots later for GitHub, LinkedIn Featured and the portfolio website:
+This folder contains real screenshots captured from the local development version of the AI Workflow Automation Dashboard.
 
-- Dashboard workflow summary
-- New Request form
-- Request History table
-- Request Detail: captured request step
-- Request Detail: AI-generated output step
-- Request Detail: human review step
-- Request Detail: archived confirmation
+The data shown is fake demo data created for portfolio walkthrough purposes. It does not represent real clients, personal data, production usage or business metrics.
 
-Suggested filenames:
+Captured on: July 14, 2026
 
-- `dashboard.png`
-- `new-request.png`
-- `history.png`
-- `request-detail-captured.png`
-- `request-detail-generated.png`
-- `request-detail-review.png`
-- `request-detail-archived.png`
+## Included Screenshots
 
-Capture guidance:
+- `dashboard.png`: Shows workflow visibility through summary cards, status counts and recent requests.
+- `new-request.png`: Shows the structured request creation form with business context fields and workflow settings.
+- `history.png`: Shows request tracking with status and priority labels.
+- `request-detail-captured.png`: Shows the original business request context before AI generation.
+- `request-detail-generated.png`: Shows mock AI-assisted output ready for human review.
+- `request-detail-reviewed.png`: Shows the reviewed workflow state with human-approved output ready to archive.
+- `request-detail-archived.png`: Shows the archived workflow state and traceability message.
 
-- Use the local development demo data.
-- Use a desktop viewport first for GitHub and portfolio pages.
-- Capture one tablet or narrow viewport later if responsive screenshots are useful.
-- Prefer screenshots that show the business workflow clearly, not only isolated UI controls.
+## Capture Notes
 
-Use fake demo data only. Do not include personal, confidential or real company information.
+- Screenshots were captured from the real local app, not from mockups.
+- The frontend was served locally and connected to the .NET backend API.
+- The backend used SQLite local persistence and development-only fake seed data.
+- The Request Detail page uses a guided workflow, so each detail screenshot shows the active step for that request status instead of all sections at once.
