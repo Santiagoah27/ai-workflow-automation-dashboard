@@ -353,6 +353,8 @@ Demo data is fake. Local workflow requests persist across backend restarts until
 - [LinkedIn Post](docs/linkedin-post.md)
 - [Recruiter Pitch](docs/recruiter-pitch.md)
 - [Client Pitch](docs/client-pitch.md)
+- [Public Release Checklist](docs/public-release-checklist.md)
+- [GitHub Publication Notes](docs/github-publication-notes.md)
 
 ## Current Status
 
