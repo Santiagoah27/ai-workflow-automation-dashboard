@@ -137,3 +137,11 @@ Workflow requests are now persisted with Entity Framework Core and SQLite behind
 Reason:
 
 Request history, reviewed output and status tracking are core to the project, so the portfolio-ready version needs real local persistence while remaining easy to run.
+
+## Decision 018: Add focused backend workflow tests
+
+The backend now includes a small xUnit test project focused on the application service and mock AI processor.
+
+Reason:
+
+The workflow lifecycle is the core business behavior of the project. Focused service-level tests protect request creation, mock generation, human review, archiving and not-found behavior without adding heavy test infrastructure or coupling tests to implementation details.

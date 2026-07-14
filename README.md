@@ -228,6 +228,31 @@ backend/src/Api/workflow-automation.db
 
 The database file is ignored by Git.
 
+## Testing
+
+Run the backend test suite:
+
+```bash
+cd backend
+dotnet test
+```
+
+Current backend tests cover:
+
+- Workflow request creation with Draft status and UTC timestamps
+- Mock AI generation status changes and generated output storage
+- Human review output validation and Reviewed status updates
+- Archive flow and request retrieval after archiving
+- Not-found behavior for workflow actions
+- Mock AI output variations for each desired output type
+
+Intentionally not covered yet:
+
+- Browser-based end-to-end tests
+- Full API integration tests
+- Real AI provider behavior
+- EF Core internals
+
 ## Environment Variables
 
 Create a local frontend environment file from the example:
@@ -320,6 +345,6 @@ These are intentionally outside the current MVP scope:
 
 - Add real AI provider integration behind the existing abstraction
 - Add prompt versioning documentation
-- Add automated tests around workflow services and frontend behavior
+- Add frontend behavior tests when the UI stabilizes further
 - Capture final screenshots for GitHub, LinkedIn and portfolio pages
 - Add deployment documentation when deployment is in scope
