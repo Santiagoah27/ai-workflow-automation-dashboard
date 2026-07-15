@@ -345,16 +345,13 @@ Demo data is fake. Local workflow requests persist across backend restarts until
 - Loading, empty, error and toast feedback states
 - Portfolio-ready documentation and demo flow
 
-## Portfolio Materials
+## Documentation
 
 - [Case Study](docs/case-study.md)
-- [Portfolio Summary](docs/portfolio-summary.md)
-- [LinkedIn Featured Copy](docs/linkedin-featured.md)
-- [LinkedIn Post](docs/linkedin-post.md)
-- [Recruiter Pitch](docs/recruiter-pitch.md)
-- [Client Pitch](docs/client-pitch.md)
-- [Public Release Checklist](docs/public-release-checklist.md)
-- [GitHub Publication Notes](docs/github-publication-notes.md)
+- [Architecture](docs/architecture.md)
+- [Project Brief](docs/project-brief.md)
+- [Decision Log](docs/decisions.md)
+- [Screenshot Guide](docs/screenshots/README.md)
 
 ## Current Status
 
