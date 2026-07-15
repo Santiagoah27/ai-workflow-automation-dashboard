@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { Icon, type IconName } from "@/components/ui/Icon";
 
-const navItems = [
-  { href: "/", label: "Dashboard" },
-  { href: "/requests/new", label: "New Request" },
-  { href: "/history", label: "History" },
+const navItems: Array<{ href: string; icon: IconName; label: string }> = [
+  { href: "/", icon: "dashboard", label: "Dashboard" },
+  { href: "/requests/new", icon: "documentPlus", label: "New Request" },
+  { href: "/history", icon: "history", label: "History" },
 ];
 
 type AppShellProps = {
@@ -22,7 +23,9 @@ export function AppShell({ children }: AppShellProps) {
       <aside className="sidebar">
         <div className="sidebar-inner">
           <Link className="brand" href="/">
-            <span className="brand-mark" aria-hidden="true">AW</span>
+            <span className="brand-mark" aria-hidden="true">
+              AW
+            </span>
             <span className="brand-copy">
               <span className="brand-title">AI Workflow Automation</span>
               <span className="brand-subtitle">Reviewed business outputs</span>
@@ -48,7 +51,7 @@ export function AppShell({ children }: AppShellProps) {
                       className={`nav-link ${isActive ? "active" : ""}`.trim()}
                       href={item.href}
                     >
-                      <span className="nav-marker" aria-hidden="true" />
+                      <Icon className="nav-icon" name={item.icon} size={17} />
                       {item.label}
                     </Link>
                   </li>
@@ -58,7 +61,7 @@ export function AppShell({ children }: AppShellProps) {
           </nav>
           <div className="sidebar-footer">
             <span className="environment-dot" aria-hidden="true" />
-            <span>Local portfolio MVP</span>
+            <span>Portfolio MVP</span>
           </div>
         </div>
       </aside>

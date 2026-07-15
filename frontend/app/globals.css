@@ -170,16 +170,26 @@ a {
   color: #dbe7ff;
 }
 
-.nav-marker {
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 999px;
-  background: #465466;
+.icon {
+  display: block;
+  flex: 0 0 auto;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
 }
 
-.nav-link.active .nav-marker {
-  background: var(--primary);
-  box-shadow: 0 0 0 4px rgba(91, 141, 239, 0.12);
+.nav-icon {
+  color: #718198;
+  transition: color 150ms ease;
+}
+
+.nav-link:hover .nav-icon {
+  color: var(--text-soft);
+}
+
+.nav-link.active .nav-icon {
+  color: #93b5fa;
 }
 
 .sidebar-footer {
@@ -290,28 +300,23 @@ a {
   content: "";
 }
 
-.stat-card.draft::after,
-.stat-card.draft .stat-indicator {
+.stat-card.draft::after {
   background: var(--warning);
 }
 
-.stat-card.generated::after,
-.stat-card.generated .stat-indicator {
+.stat-card.generated::after {
   background: var(--primary);
 }
 
-.stat-card.reviewed::after,
-.stat-card.reviewed .stat-indicator {
+.stat-card.reviewed::after {
   background: var(--success);
 }
 
-.stat-card.failed::after,
-.stat-card.failed .stat-indicator {
+.stat-card.failed::after {
   background: var(--danger);
 }
 
-.stat-card.archived::after,
-.stat-card.archived .stat-indicator {
+.stat-card.archived::after {
   background: #78879a;
 }
 
@@ -322,12 +327,45 @@ a {
   gap: 0.75rem;
 }
 
-.stat-indicator {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 999px;
-  background: var(--cyan);
-  box-shadow: 0 0 0 4px rgba(76, 184, 199, 0.09);
+.stat-icon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #31505c;
+  border-radius: 0.42rem;
+  background: #12252b;
+  color: #71c9d5;
+}
+
+.stat-card.draft .stat-icon {
+  border-color: #59451d;
+  background: var(--warning-muted);
+  color: #e6bd6e;
+}
+
+.stat-card.generated .stat-icon {
+  border-color: #304e7f;
+  background: var(--primary-muted);
+  color: #9fbdff;
+}
+
+.stat-card.reviewed .stat-icon {
+  border-color: #285744;
+  background: var(--success-muted);
+  color: #7dd6b1;
+}
+
+.stat-card.failed .stat-icon {
+  border-color: #6b3038;
+  background: var(--danger-muted);
+  color: #f19aa0;
+}
+
+.stat-card.archived .stat-icon {
+  border-color: #3b4654;
+  background: #1a212a;
+  color: #aab5c3;
 }
 
 .stat-label {
@@ -1266,7 +1304,6 @@ a {
     font-size: 0.78rem;
   }
 
-  .nav-marker,
   .sidebar-footer {
     display: none;
   }
