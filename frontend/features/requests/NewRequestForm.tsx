@@ -77,7 +77,7 @@ export function NewRequestForm() {
 
       {error ? <ErrorMessage message={error} /> : null}
 
-      <Card>
+      <Card className="form-card">
         <form className="form-grid" onSubmit={handleSubmit}>
           <div className="form-section full">
             <h2>Request basics</h2>
@@ -96,6 +96,7 @@ export function NewRequestForm() {
                 setForm({ ...form, businessName: event.target.value })
               }
               placeholder="Northstar Clinic"
+              required
               type="text"
               value={form.businessName}
             />
@@ -112,6 +113,7 @@ export function NewRequestForm() {
                 setForm({ ...form, title: event.target.value })
               }
               placeholder="Prepare client onboarding summary"
+              required
               type="text"
               value={form.title}
             />
@@ -217,12 +219,13 @@ export function NewRequestForm() {
                 setForm({ ...form, context: event.target.value })
               }
               placeholder="Describe the situation, audience, constraints and desired business outcome. Example: A client needs a concise onboarding summary after an intake call."
+              required
               value={form.context}
             />
             <span className="field-hint">Required. This is the main business context.</span>
           </div>
 
-          <div className="field full">
+          <div className="field full form-actions">
             <label htmlFor="notes">Notes</label>
             <textarea
               className="textarea"

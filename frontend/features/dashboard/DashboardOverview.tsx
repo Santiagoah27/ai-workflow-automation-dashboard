@@ -90,7 +90,7 @@ export function DashboardOverview() {
         <>
           <section className="section-grid" aria-label="Workflow summary">
             <StatCard
-              label="Total Requests"
+              label="Total requests"
               value={String(requests.length)}
               note="All workflow requests created in the system."
             />
@@ -109,7 +109,7 @@ export function DashboardOverview() {
             <StatCard
               label="Reviewed"
               value={String(counts.Reviewed)}
-              note="Outputs approved or edited by the user."
+              note="Outputs reviewed or edited by the user."
               tone="reviewed"
             />
             <StatCard
@@ -150,7 +150,7 @@ export function DashboardOverview() {
               }
             />
           ) : (
-            <Card>
+            <Card className="table-panel">
               <div className="panel-heading">
                 <h2 className="panel-title">Recent requests</h2>
                 <Link className="text-link" href="/history">
@@ -173,8 +173,8 @@ export function DashboardOverview() {
                   <tbody>
                     {recentRequests.map((request) => (
                       <tr key={request.id}>
-                        <td>{request.title}</td>
-                        <td>{request.businessName}</td>
+                        <td className="table-primary">{request.title}</td>
+                        <td className="table-secondary">{request.businessName}</td>
                         <td>{formatEnum(request.desiredOutputType)}</td>
                         <td>
                           <PriorityBadge priority={request.priority} />
@@ -185,7 +185,7 @@ export function DashboardOverview() {
                         <td>{formatDate(request.updatedAt)}</td>
                         <td>
                           <Link
-                            className="text-link"
+                            className="text-link row-action"
                             href={`/requests/${request.id}`}
                           >
                             Open

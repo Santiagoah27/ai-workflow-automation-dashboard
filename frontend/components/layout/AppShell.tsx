@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
 const navItems = [
@@ -12,38 +15,56 @@ type AppShellProps = {
 };
 
 export function AppShell({ children }: AppShellProps) {
+  const pathname = usePathname();
+
   return (
     <div className="app-shell">
-      <header className="topbar">
-        <div className="topbar-inner">
+      <aside className="sidebar">
+        <div className="sidebar-inner">
           <Link className="brand" href="/">
-            <span className="brand-title">AI Workflow Automation</span>
-            <span className="brand-subtitle">
-              Turn repetitive work into reviewed business outputs
+            <span className="brand-mark" aria-hidden="true">AW</span>
+            <span className="brand-copy">
+              <span className="brand-title">AI Workflow Automation</span>
+              <span className="brand-subtitle">Reviewed business outputs</span>
             </span>
           </Link>
-          <nav aria-label="Main navigation">
+          <nav className="sidebar-nav" aria-label="Main navigation">
             <ul className="nav-list">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <Link className="nav-link" href={item.href}>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {navItems.map((item) => {
+                const isRequestDetail =
+                  pathname.startsWith("/requests/") &&
+                  pathname !== "/requests/new";
+                const isActive =
+                  item.href === "/"
+                    ? pathname === "/"
+                    : item.href === "/history"
+                      ? pathname === item.href || isRequestDetail
+                      : pathname.startsWith(item.href);
+
+                return (
+                  <li key={item.href}>
+                    <Link
+                      aria-current={isActive ? "page" : undefined}
+                      className={`nav-link ${isActive ? "active" : ""}`.trim()}
+                      href={item.href}
+                    >
+                      <span className="nav-marker" aria-hidden="true" />
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
+          <div className="sidebar-footer">
+            <span className="environment-dot" aria-hidden="true" />
+            <span>Local portfolio MVP</span>
+          </div>
         </div>
-      </header>
-      <section className="value-strip" aria-label="Product value">
-        <div className="value-strip-inner">
-          <span>Structured requests</span>
-          <span>AI-assisted drafts</span>
-          <span>Human review</span>
-          <span>Traceable history</span>
-        </div>
-      </section>
-      <main className="main-content">{children}</main>
+      </aside>
+      <div className="shell-main">
+        <main className="main-content">{children}</main>
+      </div>
     </div>
   );
 }

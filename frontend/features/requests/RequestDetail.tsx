@@ -296,7 +296,7 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
             <h2>AI output generated</h2>
             <p>
               AI generated a first draft from the captured context. Review it
-              before creating the approved version.
+              before creating the human-reviewed version.
             </p>
           </div>
           <Badge status={currentRequest.status} />
@@ -388,7 +388,7 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
           <div>
             <span className="step-eyebrow">Step 3</span>
             <h2>Human reviewed</h2>
-            <p>Edit and approve the final human-reviewed output.</p>
+            <p>Edit and save the final human-reviewed output.</p>
           </div>
           <Badge status={currentRequest.status} />
         </div>
@@ -396,7 +396,7 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
         {!currentRequest.generatedOutput ? (
           <EmptyState
             title="Review starts after generation"
-            description="Generate output first, then review and approve the final version."
+            description="Generate output first, then review and finalize the reviewed version."
             action={
               <Button
                 onClick={() => goToStep("captured")}
@@ -413,7 +413,7 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
           <>
             <section className="guided-confirmation">
               <h3>Human-reviewed output saved.</h3>
-              <p>The approved version is stored separately from the AI-generated draft.</p>
+              <p>The reviewed version is stored separately from the AI-generated draft.</p>
             </section>
             <pre className="guided-output reviewed">{currentRequest.reviewedOutput}</pre>
             <div className="guided-actions">
@@ -464,7 +464,7 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
               <textarea
                 className="textarea reviewed-output compact-reviewed-output"
                 onChange={(event) => setReviewedOutput(event.target.value)}
-                placeholder="Edit the generated output before saving the human-approved version."
+                placeholder="Edit the generated output before saving the human-reviewed version."
                 value={reviewedOutput}
               />
             </label>
@@ -613,6 +613,16 @@ export function RequestDetail({ requestId }: RequestDetailProps) {
               </div>
               <p>{request.businessName}</p>
             </div>
+            <dl className="detail-header-meta">
+              <div>
+                <dt>Created</dt>
+                <dd>{formatDate(request.createdAt)}</dd>
+              </div>
+              <div>
+                <dt>Updated</dt>
+                <dd>{formatDate(request.updatedAt)}</dd>
+              </div>
+            </dl>
           </header>
 
           <nav className="guided-stepper" aria-label="Workflow progress">

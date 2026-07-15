@@ -5,7 +5,7 @@ import { ToastProvider } from "@/components/ui/ToastProvider";
 
 export const metadata: Metadata = {
   title: "AI Workflow Automation Dashboard",
-  description: "Internal tool skeleton for AI-assisted workflow automation.",
+  description: "Portfolio MVP for structured, traceable and AI-assisted business workflows.",
 };
 
 export default function RootLayout({

@@ -8,7 +8,10 @@ type StatCardProps = {
 export function StatCard({ label, value, note, tone = "neutral" }: StatCardProps) {
   return (
     <section className={`panel stat-card ${tone}`}>
-      <span className="stat-label">{label}</span>
+      <div className="stat-card-header">
+        <span className="stat-label">{label}</span>
+        <span className="stat-indicator" aria-hidden="true" />
+      </div>
       <strong className="stat-value">{value}</strong>
       <span className="stat-note">{note}</span>
     </section>

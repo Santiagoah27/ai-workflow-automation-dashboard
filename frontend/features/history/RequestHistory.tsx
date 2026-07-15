@@ -153,8 +153,8 @@ export function RequestHistory() {
                 <tbody>
                   {visibleRequests.map((request) => (
                     <tr key={request.id}>
-                      <td>{request.title}</td>
-                      <td>{request.businessName}</td>
+                      <td className="table-primary">{request.title}</td>
+                      <td className="table-secondary">{request.businessName}</td>
                       <td>{formatEnum(request.requestType)}</td>
                       <td>{formatEnum(request.desiredOutputType)}</td>
                       <td>
@@ -166,7 +166,7 @@ export function RequestHistory() {
                       <td>{formatDate(request.createdAt)}</td>
                       <td>{formatDate(request.updatedAt)}</td>
                       <td>
-                        <Link className="text-link" href={`/requests/${request.id}`}>
+                        <Link className="text-link row-action" href={`/requests/${request.id}`}>
                           Open
                         </Link>
                       </td>
