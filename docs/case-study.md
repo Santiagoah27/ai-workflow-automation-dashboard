@@ -10,7 +10,7 @@ The project showcases full-stack delivery with Next.js, React, TypeScript and .N
 
 Many teams still manage repetitive processes through Excel, email, WhatsApp, documents or unstructured notes. These tools are flexible, but they often make internal work harder to standardize, review and track.
 
-This project was built as a portfolio project to explore how those workflows can be modeled as structured requests, processed through AI-assisted drafting and reviewed by a human before the final output is saved.
+This project was built as a portfolio MVP to explore how those workflows can be modeled as structured requests, processed through mock AI-assisted drafting and reviewed by a human before the final output is saved.
 
 ## Problem
 
@@ -30,7 +30,7 @@ AI Workflow Automation Dashboard provides a simple internal-tool experience for 
 
 Users can create structured requests, generate mock AI-assisted outputs, review and edit the result, save a human-reviewed version, track status and keep the request available in history.
 
-The goal is not to replace human judgment. The goal is to demonstrate a workflow where AI helps produce a first draft while the user remains responsible for review, editing and approval.
+The goal is not to replace human judgment. The goal is to demonstrate a workflow where mock AI behavior helps produce a first draft while the user remains responsible for review, editing and finalization.
 
 ## Product Workflow
 
@@ -71,7 +71,7 @@ The design keeps original input, generated output and reviewed output separated.
 
 Human review is a core part of the product design.
 
-The app separates the generated draft from the reviewed output so the user can edit, approve and save the final version intentionally. This keeps the user in control, allows business context to be corrected before approval and makes the process easier to audit.
+The app separates the generated draft from the reviewed output so the user can edit, finalize and save the reviewed version intentionally. This keeps the user in control, allows business context to be corrected before the result is saved and makes the process easier to audit.
 
 The request detail page uses a guided workflow so users see the relevant step at each stage: captured request, generated output, human review and archive.
 

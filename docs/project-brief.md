@@ -6,7 +6,7 @@ AI Workflow Automation Dashboard
 
 ## Overview
 
-AI Workflow Automation Dashboard is a full-stack portfolio project that demonstrates how businesses can automate repetitive internal workflows using structured data, AI-assisted processing, request tracking and editable generated outputs.
+AI Workflow Automation Dashboard is a full-stack portfolio project that demonstrates how businesses can automate repetitive internal workflows using structured data, mock AI-assisted processing, request tracking and editable generated outputs.
 
 ## Problem
 
@@ -16,9 +16,9 @@ This creates duplicated work, inconsistent outputs, lack of traceability and was
 
 ## Solution
 
-This application allows users to create structured workflow requests, generate AI-assisted outputs, review and edit the result, track request status and keep a history of processed work.
+This application allows users to create structured workflow requests, generate mock AI-assisted outputs, review and edit the result, track request status and keep a history of processed work.
 
-The application uses a human-in-the-loop model where AI supports the workflow, but users remain responsible for reviewing and approving the final output.
+The application uses a human-in-the-loop model where mock AI behavior supports the workflow, but users remain responsible for reviewing and finalizing the output.
 
 ## Target Users
 
@@ -33,7 +33,7 @@ The application uses a human-in-the-loop model where AI supports the workflow, b
 
 1. A user creates a workflow request.
 2. The user enters business context, notes and desired output type.
-3. The app processes the request through an AI workflow processor.
+3. The app processes the request through a mock AI workflow processor.
 4. A structured generated output is created.
 5. The user reviews and edits the generated output.
 6. The request status is updated.
@@ -52,7 +52,7 @@ The application uses a human-in-the-loop model where AI supports the workflow, b
 
 ## MVP Exclusions
 
-The first MVP will not include:
+The portfolio MVP does not include:
 
 - Authentication
 - Payments
@@ -69,7 +69,7 @@ The first MVP will not include:
 ## What This Project Demonstrates
 
 - Full-stack development
-- AI-driven workflow automation
+- AI-assisted workflow design
 - Business process thinking
 - Clean API design
 - Maintainable frontend architecture

@@ -2,9 +2,9 @@
 
 ## Overview
 
-The project will use a simple full-stack architecture with a Next.js frontend and a .NET 8 Web API backend.
+The project uses a simple full-stack architecture with a Next.js frontend and a .NET 8 Web API backend.
 
-The architecture must remain simple, maintainable and easy to understand for portfolio review.
+The architecture remains simple, maintainable and easy to understand for portfolio review.
 
 ## High-Level Structure
 
@@ -33,7 +33,7 @@ The main workflow is:
 2. The frontend sends the request to the backend API.
 3. Application services coordinate request lifecycle changes.
 4. The AI workflow processor creates a mock generated output.
-5. The user reviews and saves a human-approved output.
+5. The user reviews and saves a human-reviewed output.
 6. The request remains available in history with its status and timestamps.
 
 ## Frontend Structure

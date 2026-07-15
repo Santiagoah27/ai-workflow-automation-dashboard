@@ -4,7 +4,7 @@
 
 Build a professional, portfolio-ready full-stack project that demonstrates how businesses can automate repetitive internal workflows using structured forms, AI-assisted processing, request tracking and editable generated outputs.
 
-This is not just a code demo. It must show business value, clean engineering, practical AI integration, maintainable architecture and a professional product mindset.
+This project is designed as a professional portfolio project that demonstrates full-stack engineering, AI workflow design, business process automation, maintainable architecture and a professional product mindset.
 
 ## Agent Role
 
@@ -44,7 +44,7 @@ The agent must prioritize:
 - Clear user flows
 - Simple MVP execution
 - Practical workflows
-- Features that help demonstrate freelance value
+- Features that demonstrate practical business value
 
 The agent must avoid adding features only because they are technically interesting.
 
@@ -97,7 +97,7 @@ Rules:
 - Do not hardcode API keys.
 - Use environment variables for secrets.
 - Keep original input, generated output and reviewed output separated.
-- Support human review before final approval.
+- Support human review before the output is finalized.
 - Handle AI failures gracefully.
 - Keep prompts versionable and documented.
 
@@ -114,7 +114,7 @@ The agent must keep the project portfolio-ready by maintaining:
 - Feature explanations
 - Business value explanations
 
-Documentation must be clear enough for recruiters, clients and technical reviewers.
+Documentation must be clear enough for portfolio and technical review.
 
 ### 7. QA-Minded Engineering
 
@@ -172,11 +172,11 @@ Do not add:
 
 Unless explicitly requested later.
 
-### 10. Commercial Awareness
+### 10. Business Value Awareness
 
-The agent must understand that this project supports freelance positioning.
+The agent must keep the project's practical business context clear.
 
-The project should demonstrate services such as:
+The project should demonstrate capabilities such as:
 
 - AI workflow automation
 - Internal tools

@@ -2,7 +2,11 @@
 
 A full-stack portfolio project that demonstrates how repetitive business workflows can be converted into structured, traceable and AI-assisted internal tools.
 
-This project is designed to show practical full-stack engineering, AI workflow design, clean architecture and product thinking for internal business tools. It is not just a CRUD demo: the core experience follows a business request from structured input, to mock AI-assisted output, to human review, approval and history.
+This project is designed to show practical full-stack engineering, AI workflow design, clean architecture and product thinking for internal business tools. It is not just a CRUD demo: the core experience follows a business request from structured input, to mock AI-assisted output, to human review, status tracking and history.
+
+## Project Type
+
+This is a portfolio MVP built for local demonstration purposes. It is not a production application and does not currently include authentication, deployment or a real AI provider integration.
 
 ## Portfolio Summary
 
@@ -14,16 +18,16 @@ It was built to showcase full-stack development with Next.js, React, TypeScript 
 
 Many small businesses and internal teams still manage repetitive workflows through Excel, email, WhatsApp, documents or unstructured notes. This often creates duplicated work, inconsistent outputs, lack of traceability and slower response times.
 
-This project demonstrates how those workflows can be structured, processed with AI assistance and reviewed by a human before being finalized.
+This project demonstrates how those workflows can be structured, processed through mock AI-assisted drafting and reviewed by a human before being finalized.
 
 ## Solution
 
-AI Workflow Automation Dashboard lets users create structured workflow requests, generate AI-assisted drafts, review and edit the generated result, save a human-reviewed output and keep the full request available in history.
+AI Workflow Automation Dashboard lets users create structured workflow requests, generate mock AI-assisted drafts, review and edit the generated result, save a human-reviewed output and keep the full request available in history.
 
 The application follows a human-in-the-loop approach:
 
 - AI helps generate a useful first draft.
-- The user remains responsible for review and approval.
+- The user remains responsible for review and finalization.
 - Original input, generated output and reviewed output stay separated.
 - Request status gives visibility into the business process.
 
@@ -119,7 +123,7 @@ These screenshots were captured from the real local development application with
 
 - AI workflow processor abstraction
 - Mock AI provider for local demo
-- Future-ready real provider integration through environment variables
+- Architecture prepared for future real provider integration through environment variables
 - No hardcoded API keys
 
 ## Architecture Overview
@@ -193,7 +197,7 @@ docs/
 
 - Node.js
 - npm
-- .NET SDK with `net8.0` targeting support
+- .NET 8 SDK
 
 ### Frontend
 
@@ -355,7 +359,9 @@ Demo data is fake. Local workflow requests persist across backend restarts until
 
 ## Current Status
 
-In development.
+Portfolio MVP completed.
+
+The current version includes the full local demo flow: request creation, mock AI-assisted generation, human review, SQLite persistence, request history, archive flow, backend tests, screenshots and portfolio documentation.
 
 Implemented:
 
@@ -368,6 +374,7 @@ Implemented:
 - Archive flow
 - Floating toast notifications
 - Development demo data
+- Backend workflow tests
 - Portfolio screenshots captured from the local app
 
 ## Future Improvements

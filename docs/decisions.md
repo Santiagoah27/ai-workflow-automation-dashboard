@@ -8,7 +8,7 @@ The first version will focus on a simple but complete workflow automation experi
 
 Reason:
 
-A small, polished and complete project is better for portfolio and freelance positioning than a large unfinished application.
+A small, polished and complete project communicates the product and engineering decisions more clearly than a large unfinished application.
 
 ## Decision 002: Use mock AI provider first
 
@@ -80,7 +80,7 @@ The frontend polish prioritizes clear workflow visibility, professional forms, r
 
 Reason:
 
-The project is intended to communicate practical freelance value. A restrained internal-tool experience is more useful for this portfolio project than a decorative or marketing-heavy interface.
+The project is intended to communicate practical business and engineering value. A restrained internal-tool experience is more useful for this portfolio project than a decorative or marketing-heavy interface.
 
 ## Decision 011: Seed fake development data for demos
 
@@ -124,11 +124,11 @@ Inline or fixed page-level feedback can be missed when users are focused on anot
 
 ## Decision 016: Present the repository as a portfolio case study
 
-The README and supporting docs are structured to explain the business problem, workflow, architecture, demo flow and future improvements for GitHub, LinkedIn Featured and portfolio review.
+The README and supporting docs are structured to explain the business problem, workflow, architecture, demo flow and future improvements for public portfolio review.
 
 Reason:
 
-The project is intended to communicate freelance-ready product and engineering judgment. A portfolio case-study structure helps recruiters, clients and technical reviewers understand the business value, technical boundaries and current MVP status quickly.
+The case-study structure helps reviewers understand the business value, engineering decisions, technical boundaries and current MVP status quickly.
 
 ## Decision 017: Replace in-memory persistence with SQLite
 
@@ -156,8 +156,8 @@ Real screenshots help reviewers understand the product experience quickly withou
 
 ## Decision 020: Create separate portfolio and communication assets
 
-The project now includes separate documents for the case study, portfolio summary, LinkedIn Featured copy, LinkedIn post, recruiter pitch and client pitch.
+The project keeps the public case study separate from supporting portfolio and communication assets.
 
 Reason:
 
-The project is intended to support professional positioning for job opportunities and freelance work. Separating technical documentation from portfolio, recruiter and client-facing copy keeps the repository clear and makes the communication assets easier to reuse.
+Separating technical documentation from supporting communication copy keeps the public project documentation focused while preserving reusable materials outside the main README.
